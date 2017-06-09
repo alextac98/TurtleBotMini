@@ -19,10 +19,10 @@ ros::Subscriber blinkLED_sub;
 
 //-----Motor Control-------------------------------------------------------------------------------------
 ros::Subscriber enableMotors_sub;
-void enableMotors_callback(const);
+void enableMotors_callback(const std_msgs::Bool& msg);
 
 ros::Subscriber setMotor_sub;
-void setMotor_callback(const);
+void setMotor_callback(const beaglebot::setMotor_msg& msg);
 ros::Subscriber setAllMotors_sub;
 //void setAllMotors(const);
 
