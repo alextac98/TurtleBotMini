@@ -2,7 +2,7 @@
 #include "std_msgs/String.h"
 #include "std_msgs/Bool.h"
 #include "beaglebot/beaglebot_node.h"
-#include "beaglebot/setMotor_msg.h"
+//#include "beaglebot/setMotor_msg.h"
 
 extern "C"
 {
