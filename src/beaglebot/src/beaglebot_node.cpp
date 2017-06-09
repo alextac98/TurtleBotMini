@@ -37,6 +37,7 @@ int main(int argc, char **argv)
 
 //-----Motor Control-------------------------------------------------------------------------------------
   enableMotors_sub = nh.subscribe("enableMotors", 1, enableMotors);
+  setMotor_sub = nh.subscribe("setMotors", 1, setMotor);
 //-----Quadrature Encoder Control------------------------------------------------------------------------
 
 //-----Analog Reads--------------------------------------------------------------------------------------
@@ -58,11 +59,11 @@ int main(int argc, char **argv)
     loop_rate.sleep();
   }
 
-//  if (rc_cleanup()< 0) {
-//    ROS_INFO("Error: failed to close robotics cape drivers");
-//    ROS_INFO("Please run rc_kill in a terminal");
-//    return -1;
-//  }
+  if (rc_cleanup()< 0) {
+    ROS_INFO("Error: failed to close robotics cape drivers");
+    ROS_INFO("Please run rc_kill in a terminal");
+    return -1;
+  }
 
   return 0;
 }
