@@ -9,6 +9,9 @@ project(beaglebot)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   roscpp
+  rospy
+  std_msgs
+  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -100,11 +103,12 @@ find_package(catkin REQUIRED COMPONENTS
 ## LIBRARIES: libraries you create in this project that dependent projects also need
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
+
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES beaglebot
-#  CATKIN_DEPENDS roscpp
-#  DEPENDS system_lib
+    #  INCLUDE_DIRS include
+    #  LIBRARIES beaglebot
+    #  CATKIN_DEPENDS roscpp
+    #  DEPENDS system_lib
 )
 
 ###########
@@ -113,6 +117,7 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
+
 include_directories(
 include
   ${catkin_INCLUDE_DIRS}
