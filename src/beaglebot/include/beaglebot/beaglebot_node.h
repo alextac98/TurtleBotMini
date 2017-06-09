@@ -24,6 +24,7 @@ int enableMotors(bool);
 ros::Subscriber setMotor_sub;
 int setMotor(setmotor);
 ros::Subscriber setAllMotors_sub;
+int setAllMotors(float);
 
 ros::Subscriber freeSpinMotor_sub;
 ros::Subscriber freeSpinAllMotors_sub;
