@@ -19,12 +19,12 @@ ros::Subscriber blinkLED_sub;
 
 //-----Motor Control-------------------------------------------------------------------------------------
 ros::Subscriber enableMotors_sub;
-int enableMotors(bool);
+void enableMotors_callback(const);
 
 ros::Subscriber setMotor_sub;
-int setMotor(setmotor);
+void setMotor_callback(const);
 ros::Subscriber setAllMotors_sub;
-int setAllMotors(float);
+//void setAllMotors(const);
 
 ros::Subscriber freeSpinMotor_sub;
 ros::Subscriber freeSpinAllMotors_sub;

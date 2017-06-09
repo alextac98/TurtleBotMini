@@ -1,6 +1,8 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+#include "std_msgs/Bool.h"
 #include "beaglebot/beaglebot_node.h"
+#include "beaglebot/setMotor_msg.h"
 
 extern "C"
 {
@@ -17,7 +19,6 @@ int main(int argc, char **argv)
 //-----ROS Initialization-----------------------------------------------------------------------------
   ros::init(argc, argv, "beaglebot_node");
   ros::NodeHandle nh;
-  beaglebot::setMotor_msg setmotor;
 
 //-----BeagleBone Robotics Cape Initialization--------------------------------------------------------
   if (rc_initialize() < 0){
@@ -37,7 +38,7 @@ int main(int argc, char **argv)
 
 //-----Motor Control-------------------------------------------------------------------------------------
   enableMotors_sub = nh.subscribe("enableMotors", 1, enableMotors);
-  setMotor_sub = nh.subscribe("setMotors", 1, setMotor);
+  setMotor_sub = nh.subscribe("setMotors", 15, setMotor_callback);
 //-----Quadrature Encoder Control------------------------------------------------------------------------
 
 //-----Analog Reads--------------------------------------------------------------------------------------
@@ -78,17 +79,18 @@ int main(int argc, char **argv)
 
 //Motor Control
 
-int enableMotors(bool input){
-  if (input){
+void enableMotors_callback(const std_msgs::Bool& msg){
+  if (msg.data){
     rc_enable_motors();
   } else {
     rc_disable_motors();
   }
 }
 
-int setMotor(setmotor){
-  float duty = setmotor.duty / 100; //change from -100 to 100 to -1 to 1
+void setMotor_callback(const beaglebot::setMotor_msg& msg){
+  float duty = msg.duty / 100; //change from -100 to 100 to -1 to 1
   //check for out-of-bounds duty
+
   if (duty > 1) {
     duty = 1;
   } else if (duty < -1) {
@@ -96,7 +98,7 @@ int setMotor(setmotor){
   }
 
   //check for out-of-bounds motor
-  return rc_set_motor(setmotor.motor, duty);
+  rc_set_motor(msg.motor, duty);
 
 }
 
