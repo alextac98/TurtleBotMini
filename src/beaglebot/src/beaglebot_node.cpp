@@ -52,11 +52,6 @@ int main(int argc, char **argv)
 
   while (ros::ok())
   {
-    //std_msgs::String msg;
-    //msg.data = "hello world";
-
-    //chatter_pub.publish(msg);
-
     ros::spinOnce();
 
     loop_rate.sleep();
