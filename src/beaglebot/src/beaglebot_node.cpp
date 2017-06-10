@@ -1,8 +1,10 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "std_msgs/Bool.h"
+#include "beaglebot_msg/setMotor_msg.h"
+
 #include "beaglebot/beaglebot_node.h"
-//#include "beaglebot/setMotor_msg.h"
+
 
 extern "C"
 {
@@ -37,7 +39,7 @@ int main(int argc, char **argv)
 //-----Button Control------------------------------------------------------------------------------------
 
 //-----Motor Control-------------------------------------------------------------------------------------
-  enableMotors_sub = nh.subscribe("enableMotors", 1, enableMotors);
+  enableMotors_sub = nh.subscribe("enableMotors", 1, enableMotors_callback);
   setMotor_sub = nh.subscribe("setMotors", 15, setMotor_callback);
 //-----Quadrature Encoder Control------------------------------------------------------------------------
 
@@ -50,10 +52,10 @@ int main(int argc, char **argv)
 
   while (ros::ok())
   {
-    std_msgs::String msg;
-    msg.data = "hello world";
+    //std_msgs::String msg;
+    //msg.data = "hello world";
 
-    chatter_pub.publish(msg);
+    //chatter_pub.publish(msg);
 
     ros::spinOnce();
 
@@ -79,7 +81,7 @@ int main(int argc, char **argv)
 
 //Motor Control
 
-void enableMotors_callback(const std_msgs::Bool& msg){
+void enableMotors_callback(const std_msgs::Bool msg){
   if (msg.data){
     rc_enable_motors();
   } else {
@@ -87,7 +89,7 @@ void enableMotors_callback(const std_msgs::Bool& msg){
   }
 }
 
-void setMotor_callback(const beaglebot::setMotor_msg& msg){
+void setMotor_callback(const beaglebot_msg::setMotor_msg msg){
   float duty = msg.duty / 100; //change from -100 to 100 to -1 to 1
   //check for out-of-bounds duty
 

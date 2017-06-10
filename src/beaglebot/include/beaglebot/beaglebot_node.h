@@ -1,6 +1,7 @@
 #ifndef BEAGLEBOT_NODE_H
 #define BEAGLEBOT_NODE_H
 
+
 //-----Signal Handlers-----------------------------------------------------------------------------------
 ros::Subscriber disableSignalHandler_sub; //not implemented
 ros::Subscriber enableSignalHandler_sub;  //not implemented
@@ -19,10 +20,10 @@ ros::Subscriber blinkLED_sub;
 
 //-----Motor Control-------------------------------------------------------------------------------------
 ros::Subscriber enableMotors_sub;
-void enableMotors_callback(const std_msgs::Bool& msg);
+void enableMotors_callback(const std_msgs::Bool msg);
 
 ros::Subscriber setMotor_sub;
-void setMotor_callback(const beaglebot::setMotor_msg& msg);
+void setMotor_callback(const beaglebot_msg::setMotor_msg msg);
 ros::Subscriber setAllMotors_sub;
 //void setAllMotors(const);
 
